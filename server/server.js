@@ -6,6 +6,7 @@ const express=require('express')
 
 const publicPath=path.join(__dirname,'../public')
 const port=process.env.PORT
+console.log(port)
 var app=express()
 
 app.use(express.static(publicPath))
