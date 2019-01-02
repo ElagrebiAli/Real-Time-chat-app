@@ -8,6 +8,7 @@ const http=require('http')
 const express=require('express')
 const socketIO=require('socket.io')
 
+const {generateMessage}=require('./messageFunction/generateMessage')
 const publicPath=path.join(__dirname,'../public')
 const port=process.env.PORT
 
@@ -27,25 +28,14 @@ io.on('connection',(socket)=>{
     console.log('User is disconnected')
   })
 
-  socket.emit('join',{
-    from:"Admin",
-    text:"hello in chatApp",
-    joinAt:new Date().getTime()
-  })
+  socket.emit('join',generateMessage('Admin','welcome to chat app'))
 /*broadcast the message for all users expect the noined one*/
-  socket.broadcast.emit('newJoined',{
-    from:'Admin',
-    text:'New user joined',
-    joinedAt:new Date().getTime()
-  })
+  socket.broadcast.emit('newJoined',generateMessage('Admin','New user add'))
 
   socket.on('createMessage',(message)=>{
     console.log('UserMessage',message)
     /*broadcasting Events*/
-    io.emit('newMessage',{
-      from:message.from,
-      text:message.text
-    })
+    io.emit('newMessage',generateMessage(message.from,message.text))
   })
 })
 
