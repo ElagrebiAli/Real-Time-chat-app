@@ -26,6 +26,15 @@ io.on('connection',(socket)=>{
   socket.on('disconnect',()=>{
     console.log('User is disconnected')
   })
+  socket.emit('New email',{
+    from:"exemple1@exemple.com",
+    text:"hello",
+    createdAt:123456
+  })
+
+  socket.on('createEmail',(createEmail)=>{
+    console.log('CreateEmailFromUser',createEmail)
+  })
 })
 
 
