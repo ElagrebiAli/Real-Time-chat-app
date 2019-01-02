@@ -9,14 +9,18 @@ socket.on('disconnect',()=>{
   console.log('server is Disconnected')
 })
 
-socket.on('join',(email)=>{
-  console.log('New Email',email)
-})
-
-socket.on('newJoined',(message)=>{
-  console.log(message)
-})
 socket.on('newMessage',(message)=>{
   console.log(message)
+  var li=jQuery('<li></li>')
+  li.text(`${message.from}:${message.text}`)
+  jQuery('#messages').append(li)
 
+})
+
+jQuery('#message-form').on('submit',(event)=>{
+  event.preventDefault()
+  socket.emit('createMessage',{
+    from:'User',
+    text:jQuery('[name=message]').val()
+  })
 })

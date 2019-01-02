@@ -28,9 +28,9 @@ io.on('connection',(socket)=>{
     console.log('User is disconnected')
   })
 
-  socket.emit('join',generateMessage('Admin','welcome to chat app'))
+  socket.emit('newMessage',generateMessage('Admin','welcome to chat app'))
 /*broadcast the message for all users expect the noined one*/
-  socket.broadcast.emit('newJoined',generateMessage('Admin','New user add'))
+  socket.broadcast.emit('newMessage',generateMessage('Admin','New user add'))
 
   socket.on('createMessage',(message)=>{
     console.log('UserMessage',message)
