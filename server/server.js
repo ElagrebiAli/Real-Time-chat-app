@@ -26,14 +26,26 @@ io.on('connection',(socket)=>{
   socket.on('disconnect',()=>{
     console.log('User is disconnected')
   })
-  socket.emit('New email',{
-    from:"exemple1@exemple.com",
-    text:"hello",
-    createdAt:123456
+
+  socket.emit('join',{
+    from:"Admin",
+    text:"hello in chatApp",
+    joinAt:new Date().getTime()
+  })
+/*broadcast the message for all users expect the noined one*/
+  socket.broadcast.emit('newJoined',{
+    from:'Admin',
+    text:'New user joined',
+    joinedAt:new Date().getTime()
   })
 
-  socket.on('createEmail',(createEmail)=>{
-    console.log('CreateEmailFromUser',createEmail)
+  socket.on('createMessage',(message)=>{
+    console.log('UserMessage',message)
+    /*broadcasting Events*/
+    io.emit('newMessage',{
+      from:message.from,
+      text:message.text
+    })
   })
 })
 
