@@ -125,8 +125,8 @@ button:disabled {
   background: #e6eaee;
   display: flex;
   padding: 10px;
-  /*height: 60px;*/
-  flex-shrink: 0;
+
+
 }
 
 .chat__footer form {
@@ -163,7 +163,7 @@ button:disabled {
   margin-right: 10px;
 }
 
-.message__title span {
+.message__title p {
   color: #999;
 }
 

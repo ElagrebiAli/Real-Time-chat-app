@@ -25,11 +25,35 @@
         <button id="send-location" >Send Location</button>
     </div>
   </div>
-
-
-      <script src="/socket.io/socket.io.js"></script>
-      <script src='/js/lib/jquery-3.3.1.min.js'></script>
-      <script src='/js/index.js'></script>
+  <!--we must put the type here because in html5 the default value of the attribute type in script tag is 'text/javascript'-->
+<script id="template-message" type='text/template'>
+    <li class="message">
+      <div class="message__title">
+        <h4>{{from}}</h4>
+        <p>{{createdAt}}</p>
+      </div>
+      <div class="message__body">
+        <p>{{text}}</p>
+      </div>
+    </li>
+</script>
+<script id="template-location" type='text/template'>
+    <li class="message">
+      <div class="message__title">
+        <h4>{{from}}</h4>
+        <p>{{createdAt}}</p>
+      </div>
+      <div class="message__body">
+        <a href="{{url}}" target="_blank">click here to Know My location</a>
+      </div>
+    </li>
+</script>
+      <script src="socket.io/socket.io.js"></script>
+      <script src='js/lib/jquery-3.3.1.min.js'></script>
+      <script src='js/lib/moment.js'></script>
+<!-- mustache.js : is a logic-less template syntax to inject same data in your template-->
+      <script src='js/lib/mustache.js'></script>
+      <script src='js/index.js'></script>
 
 
 </body>

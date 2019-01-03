@@ -11,21 +11,35 @@ socket.on('disconnect',()=>{
 
 socket.on('newMessage',(message)=>{
   console.log(message)
-  var li=jQuery('<li></li>')
-  li.text(`${message.from}:${message.text}`)
-  jQuery('#messages').append(li)
+  var timeMoment=moment(message.createdAt).format('Do MMM,ddd hh:mm A')
+  var template=jQuery('#template-message').html()
+  var html=Mustache.render(template,{
+    from:message.from,
+    createdAt:timeMoment,
+    text:message.text
+    })
+  // var li=jQuery('<li></li>')
+  // li.text(`${message.from} ${timeMoment}:${message.text}`)
+  jQuery('#messages').append(html)
 
 })
 
 socket.on('newLocation',(location)=>{
   console.log(location)
-  var li=jQuery('<li></li>'),
-      a=jQuery('<a target="_blank">My Location</a>')
-
-  li.text(`${location.from}:`)
-  a.attr('href',location.url)
-  li.append(a)
-  jQuery('#messages').append(li)
+  var timeMoment=moment(location.createdAt).format('Do MMM,ddd hh:mm A')
+  var template=jQuery('#template-location').html()
+  var html=Mustache.render(template,{
+    from:location.from,
+    createdAt:timeMoment,
+    url:location.url
+  })
+  // var li=jQuery('<li></li>'),
+  //     a=jQuery('<a target="_blank">My Location</a>')
+  //
+  // li.text(`${location.from}:`)
+  // a.attr('href',location.url)
+  // li.append(a)
+  jQuery('#messages').append(html)
 })
 
 /*attached the event with jquery*/
