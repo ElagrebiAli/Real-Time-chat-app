@@ -33,14 +33,16 @@ io.on('connection',(socket)=>{
 /*broadcast the message for all users expect the noined one*/
   socket.broadcast.emit('newMessage',generateMessage('Admin','New user add'))
 
-  socket.on('createMessage',(message)=>{
+  socket.on('createMessage',(message,callback)=>{
     console.log('UserMessage',message)
     /*broadcasting Events*/
     io.emit('newMessage',generateMessage(message.from,message.text))
+    callback()
   })
 
-  socket.on('sendLocation',(location)=>{
+  socket.on('sendLocation',(location,callback)=>{
     io.emit('newLocation',generateLocation(location.from,location.latitude,location.longitude))
+    callback()
   })
 })
 
