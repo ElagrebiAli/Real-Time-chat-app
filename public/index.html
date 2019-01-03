@@ -19,7 +19,7 @@
 
     <div class="chat__footer">
         <form id="message-form">
-          <input name="message" type="text" placeholder="Message" autofocus autocomplete="off" />
+          <textarea name="message" type="text" placeholder="Message" autofocus autocomplete="off"  style="width:100%"></textarea>
           <button >Send</button>
         </form>
         <button id="send-location" >Send Location</button>
@@ -27,7 +27,7 @@
   </div>
   <!--we must put the type here because in html5 the default value of the attribute type in script tag is 'text/javascript'-->
 <script id="template-message" type='text/template'>
-    <li class="message">
+    <li class="message" style>
       <div class="message__title">
         <h4>{{from}}</h4>
         <p>{{createdAt}}</p>

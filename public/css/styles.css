@@ -125,8 +125,8 @@ button:disabled {
   background: #e6eaee;
   display: flex;
   padding: 10px;
-
-
+  flex-shrink: 0;/*important feature:which determines how much the flex item will shrink relative to the rest of the flex items
+   in the flex container when there isn't enough space on the row.*/
 }
 
 .chat__footer form {
