@@ -17,10 +17,43 @@ socket.on('newMessage',(message)=>{
 
 })
 
+socket.on('newLocation',(location)=>{
+  console.log(location)
+  var li=jQuery('<li></li>'),
+      a=jQuery('<a target="_blank">My Location</a>')
+
+  li.text(`${location.from}:`)
+  a.attr('href',location.url)
+  li.append(a)
+  jQuery('#messages').append(li)
+})
+
+/*attached the event with jquery*/
 jQuery('#message-form').on('submit',(event)=>{
   event.preventDefault()
   socket.emit('createMessage',{
     from:'User',
     text:jQuery('[name=message]').val()
+  })
+})
+
+var locationSend=jQuery('#send-location')
+
+locationSend.on('click',function(){
+
+  if(!navigator.geolocation) {
+    return alert('Geolocation API not supported in your browser')
+  }
+  navigator.geolocation.getCurrentPosition(function(position){
+
+
+    socket.emit('sendLocation',{
+      from:'User',
+      latitude:position.coords.latitude,
+      longitude:position.coords.longitude
+    })
+
+  },function(){
+    alert('Unable to fetch location')
   })
 })

@@ -9,6 +9,7 @@ const express=require('express')
 const socketIO=require('socket.io')
 
 const {generateMessage}=require('./messageFunction/generateMessage')
+const {generateLocation}=require('./messageFunction/generateLocation')
 const publicPath=path.join(__dirname,'../public')
 const port=process.env.PORT
 
@@ -37,7 +38,13 @@ io.on('connection',(socket)=>{
     /*broadcasting Events*/
     io.emit('newMessage',generateMessage(message.from,message.text))
   })
+
+  socket.on('sendLocation',(location)=>{
+    io.emit('newLocation',generateLocation(location.from,location.latitude,location.longitude))
+  })
 })
+
+
 
 
 server.listen(port,()=>{
