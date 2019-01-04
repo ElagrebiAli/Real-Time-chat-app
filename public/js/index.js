@@ -1,10 +1,12 @@
+
 $('#form-submitted').on('submit',()=>{
   var verif=check_username()
   if(verif){
     $('[name=name]').attr('readonly',true)
     $('submitButton').attr('disabled','disabled')
   }else{
-    alert('please fill the form correctly')
+    swal("Oops" ,  "Something went wrong!" ,  "error")
+    // alert('please fill the form correctly')
     return false
   }
 

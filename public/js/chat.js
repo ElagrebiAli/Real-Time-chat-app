@@ -13,6 +13,7 @@ function deparam(queryString){
   return object
 }
 
+
 /*autoscrolling functio*/
 function autoScrolling(){
   //select DOM
@@ -36,6 +37,22 @@ if(clientHeight+scrollTop+newMessage+lastMessage>=scrollHeight){
 
 socket.on('connect',()=>{
   console.log('Connected to server')
+  var queryString=deparam(window.location.search)
+  if(!window.location.search){
+     swal ( "Oops" ,  "You must fill the Form" ,  "error" )
+     .then(()=>{
+        window.location.href='/'
+     })
+
+  }else{
+    swal("You're arrived!", "Have a nice Chat", "success")
+    .then(()=>{
+      socket.emit('join',queryString)
+    })
+    console.log('No error')
+  }
+
+
 
 })
 

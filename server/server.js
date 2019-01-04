@@ -1,5 +1,4 @@
 require('./config/config')
-
 /*built in module*/
 const path=require('path')
 const http=require('http')
@@ -28,7 +27,10 @@ io.on('connection',(socket)=>{
   socket.on('disconnect',()=>{
     console.log('User is disconnected')
   })
+  socket.on('join',(queryString)=>{
+console.log(queryString)
 
+  })
   socket.emit('newMessage',generateMessage('Admin','welcome to chat app'))
 /*broadcast the message for all users expect the noined one*/
   socket.broadcast.emit('newMessage',generateMessage('Admin','New user add'))
