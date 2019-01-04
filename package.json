@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node server/server.js",
-    "test": "SET \"NODE_ENV=test\" && mocha server/messageFunction/*.test.js"
+    "test": "SET \"NODE_ENV=test\" && mocha server/function/*.test.js"
   },
   "engines": {
     "node": "10.10.0"
@@ -14,6 +14,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.4",
+    "lodash": "^4.17.11",
     "moment": "^2.23.0",
     "socket.io": "^2.2.0",
     "sweetalert": "^2.1.2"

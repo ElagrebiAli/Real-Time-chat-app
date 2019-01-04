@@ -21,7 +21,9 @@
       </div>
       <div class="form-field">
         <label>Room name</label>
+        <!-- <input type="text" name="roomname" placeholder="roomname" autocomplete="off"/> -->
         <select name="roomname">
+          <option value=""></option>
           <option value="React Course"> React Course </option>
           <option value="Angular Course"> Angular Course</option>
           <option value="NodeJs Course">NodeJs Course</option>
@@ -32,6 +34,7 @@
       </div>
     </form>
 </div>
+<script src="socket.io/socket.io.js"></script>
 <script src="js/lib/jquery-3.3.1.min.js"></script>
 <script src="js/lib/sweetalert.js"></script>
 <script src="js/index.js"></script>

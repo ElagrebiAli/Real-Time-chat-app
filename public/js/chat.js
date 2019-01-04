@@ -51,13 +51,20 @@ socket.on('connect',()=>{
     })
     console.log('No error')
   }
-
-
-
 })
 
 socket.on('disconnect',()=>{
   console.log('server is Disconnected')
+})
+
+socket.on('updateUserList',(users)=>{
+
+var ul=$('<ul></ul>')
+users.forEach(user=>ul.append($('<li></li>').text(user)))
+$('#users').html(ul)
+
+
+
 })
 
 socket.on('newMessage',(message)=>{
@@ -100,7 +107,6 @@ jQuery('#message-form').on('submit',(event)=>{
   var inputMessage=jQuery('[name=message]')
   event.preventDefault()
   socket.emit('createMessage',{
-    from:'User',
     text:inputMessage.val()
   },()=>{
     inputMessage.val('')
@@ -120,7 +126,6 @@ locationSend.on('click',function(){
   navigator.geolocation.getCurrentPosition(function(position){
    /*this function(position) will work when the geolocation fetch the location*/
     socket.emit('sendLocation',{
-      from:'User',
       latitude:position.coords.latitude,
       longitude:position.coords.longitude
     },()=>{

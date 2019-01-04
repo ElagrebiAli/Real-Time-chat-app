@@ -1,12 +1,14 @@
-
+var socket=io()
+var verif
 $('#form-submitted').on('submit',()=>{
-  var verif=check_username()
+
   if(verif){
     $('[name=name]').attr('readonly',true)
-    $('submitButton').attr('disabled','disabled')
+    $('#submitButton').attr('disabled','disabled')
   }else{
-    swal("Oops" ,  "Something went wrong!" ,  "error")
-    // alert('please fill the form correctly')
+    swal("Oops" ,  "You forget to fill the Room name field!" ,  "error")
+
+    /*return false to not active the action of the form*/
     return false
   }
 
@@ -23,33 +25,58 @@ function check_username(){
     $('.error_username').hide()
   }
   if(username.trim().length===0){
-    console.log(username.trim.length)
+    $('#submitButton').attr('disabled','disabled')
     msg('This field is required')
   }else{
     hide()
     var testExp = new RegExp(/^[a-zA-Z0-9]+$/)
     if(!testExp.test(username)){
+      $('#submitButton').attr('disabled','disabled')
       msg('Must not have any special characters')
     }else{
       if(username.trim().length<3 ||username.trim().length>10 ){
+        $('#submitButton').attr('disabled','disabled')
         msg('Must be at least 3 characters but no more than 10')
       }else{
+         $('[name=name]').css("border-bottom","2px solid rgb(44, 62, 80)")
         $('#submitButton').removeAttr('disabled')
-        $('[name=name]').css("border-bottom","2px solid rgb(44, 62, 80)")
-        return true
+
+          }
+        }
       }
     }
+  function check_roomname(){
+
+    var roomname=$('[name=roomname]').val()
+
+    var username=$('[name=name]').val()
+    if(username){
+      socket.emit('testExistName',{
+        username,
+        roomname
+      })
+      socket.on('existName',(data)=>{
+        console.log(data)
+        if(data.val){
+        swal("Oops" ,  `Someone already in ${roomname} with this username:${username}!` ,  "error")
+        $('#submitButton').attr('disabled','disabled')
+
+         }else{
+           $('#submitButton').removeAttr('disabled')
+           verif=true
+
+
+
+        }
+      })
+    }
+
   }
-}
 
 $('[name=name]').on('input',()=>{
   check_username()
 })
-
-// $('#error_username').hide()
-// var error_username=false
-//
-// function check_username()=>{
-//   var testExp = new RegExp(/^[a-zA-Z0-9]+$/)
-//   var username=$('[name=name]').val()
-// }
+$('[name=roomname]').on('input',()=>{
+console.log($('[name=roomname]').val())
+  check_roomname()
+})
