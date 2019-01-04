@@ -3,59 +3,37 @@
 
 <head>
   <meta charset="utf-8">
-  <title>chat-app</title>
+  <title>chat |Join ChatApp</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 
-<body class="chat">
-
-  <div class="chat__sidebar">
-    <h3>Users</h3>
-    <div id="users"></div>
-  </div>
-
-  <div class="chat__main">
-    <ul id="messages" style="list-style:none" class="chat__messages"></ul>
-
-    <div class="chat__footer">
-        <form id="message-form">
-          <textarea name="message" type="text" placeholder="Message" autofocus autocomplete="off"  style="width:100%"></textarea>
-          <button >Send</button>
-        </form>
-        <button id="send-location" >Send Location</button>
-    </div>
-  </div>
-  <!--we must put the type here because in html5 the default value of the attribute type in script tag is 'text/javascript'-->
-<script id="template-message" type='text/template'>
-    <li class="message" style>
-      <div class="message__title">
-        <h4>{{from}}</h4>
-        <p>{{createdAt}}</p>
+<body class="centered-form">
+  <div class="centered-form__form">
+    <form action='/chat.html' id="form-submitted">
+      <div class="form-field">
+        <h3>Join a Chat </h3>
       </div>
-      <div class="message__body">
-        <p>{{text}}</p>
+      <div class="form-field">
+        <label>UserName </label>
+        <input type="text" name="name" placeholder="username" autofocus autocomplete="off"/>
+        <span class="error_username"></span>
       </div>
-    </li>
-</script>
-<script id="template-location" type='text/template'>
-    <li class="message">
-      <div class="message__title">
-        <h4>{{from}}</h4>
-        <p>{{createdAt}}</p>
+      <div class="form-field">
+        <label>Room name</label>
+        <select name="roomname">
+          <option value="React Course"> React Course </option>
+          <option value="Angular Course"> Angular Course</option>
+          <option value="NodeJs Course">NodeJs Course</option>
+        </select>
       </div>
-      <div class="message__body">
-        <a href="{{url}}" target="_blank">click here to Know My location</a>
+      <div class="form-field">
+        <button id="submitButton" disabled> Join </button>
       </div>
-    </li>
-</script>
-      <script src="socket.io/socket.io.js"></script>
-      <script src='js/lib/jquery-3.3.1.min.js'></script>
-      <script src='js/lib/moment.js'></script>
-<!-- mustache.js : is a logic-less template syntax to inject same data in your template-->
-      <script src='js/lib/mustache.js'></script>
-      <script src='js/index.js'></script>
-
-
+    </form>
+</div>
+<script src="js/lib/jquery-3.3.1.min.js"></script>
+<script src="js/index.js"></script>
 </body>
 
 </html>
